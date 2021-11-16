@@ -1,0 +1,13 @@
+{
+  "name": "wow-addon-search-server",
+  "version": "1.0.0",
+  "description": "Searches GitHub for WoW addons and returns structured data",
+  "main": "index.js",
+  "type": "module",
+  "repository": "git@github.com:icbat/wow-addon-search-server.git",
+  "author": "icbat",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^3.1.0"
+  }
+}
