@@ -25,6 +25,7 @@ export const get = () => {
 export const set = (newVal) => {
     lastResponse = newVal
     lastTime = Date.now()
+    console.log('Setting new cache at', lastTime)
 }
 
 

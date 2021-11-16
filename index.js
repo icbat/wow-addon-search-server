@@ -13,7 +13,7 @@ app.use(async ctx => {
 
     const page = await getPage(githubApiToken)
 
-    set(cached)
+    set(page)
     ctx.body = page
 });
 
