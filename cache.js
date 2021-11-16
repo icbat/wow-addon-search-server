@@ -1,5 +1,5 @@
-const lastTime = null
-const lastResponse = null
+let lastTime = null
+let lastResponse = null
 
 const cacheExpirationMs = process.env.CACHE_EXPIRATION_MS || 5 * 60 * 1000
 
