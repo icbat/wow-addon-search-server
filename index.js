@@ -1,45 +1,12 @@
-import fetch from 'node-fetch';
+import Koa from 'koa'
+import { getPage } from './github.js'
 
+const app = new Koa();
 const githubApiToken = process.env.GITHUB_API_TOKEN
 
-// TODO this only gets the first 100 results
-const query = /* graphql */`
-query {
-  rateLimit {
-    limit
-    cost
-    remaining
-    resetAt
-  }
-  topic(name:"wow-addon") {
-    repositories(first: 100, privacy:PUBLIC, orderBy:{field:STARGAZERS, direction:DESC}) {
-      nodes {
-        name
-        description
-        releases{
-          totalCount
-        }
-      }
-      pageInfo{
-        endCursor
-        hasNextPage
-        startCursor
-      }
-    }
-  }
-}
-`
+app.use(async ctx => {
+    const page = await getPage(githubApiToken)
+    ctx.body = page
+});
 
-const body = { query: query };
-
-fetch('https://api.github.com/graphql', {
-    method: 'post',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${githubApiToken}` }
-})
-    .then(
-        response => response.json())
-    .then(
-        data => console.log(data)
-    )
-    .catch(console.error)
+app.listen(process.env.PORT || 3000)
